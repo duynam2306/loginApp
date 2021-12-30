@@ -27,6 +27,9 @@ export class ListUserComponent implements OnInit {
     this.userService.usersCurrent.subscribe(users => this.users = users);
     console.log(this.users);
   }
+  
+  // 
+  checkUrl!: string;
 
   // Function delete user's account
   deleteUser(userId: string): void {
@@ -36,6 +39,10 @@ export class ListUserComponent implements OnInit {
     this.users.splice(index, 1);
     this.userService.changeListUser(this.users);
     console.log(this.users);
+    // When user list has 1 user, delete user = log out
+    if (this.users.length == 1) {
+      this.checkUrl = "/loginScreen";
+    }
   }
 
   updateUser(userId: string): void {
