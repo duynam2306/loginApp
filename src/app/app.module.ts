@@ -34,7 +34,7 @@ const apiUrl = 'https://5f0c7a5911b7f60016055e6c.mockapi.io/Api/ahihi';
     BrowserModule,
     AppRoutingModule,
   ],
-  providers: [UserService],
+  providers: [UserService, Title],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
