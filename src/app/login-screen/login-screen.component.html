@@ -25,9 +25,8 @@
         </div>
         <div class="inputGroup buttonGroup">
             <a id="create" type="button" value="signup" routerLink="/createUser">Sign up</a>
-            <!-- <button [disabled]="loginForm.invalid" id="logIn" type="button" value="logIn"
-                [routerLink]="userUrl" (click)="checkLogIn()">Log In</button> -->
-            <a id="logIn" type="button" value="logIn" [routerLink]="userUrl" (click)="checkLogIn()">Log In</a>
+            <a *ngIf="!check" id="logIn" type="button" value="logIn"  (click)="checkLogIn()">Check</a>
+            <a *ngIf="check" [routerLink]="userUrl" type="button" value="halo" >Log In</a>
         </div>
     </div>
 </form>
