@@ -44,20 +44,21 @@ th {
 
 .buttonEdit {
     padding-left: 5%;
+    display: flex;
+    flex-direction: row;
 }
 
-.buttonEdit button {
+.buttonUpdate, .buttonDelete {
+    width: 70px;
     height: 25px;
     margin: 1%;
+    padding-top: 2%;
+    padding-left: 1%;
     border: none;
     border-radius: 5px;
 }
 
 .buttonUpdate {
-    height: 25px;
-    margin: 1%;
-    border: none;
-    border-radius: 5px;
     background-color: rgb(128, 255, 255);
 }
 
