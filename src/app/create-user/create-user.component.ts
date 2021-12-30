@@ -16,6 +16,7 @@ export class CreateUserComponent implements OnInit {
 
   userUrl!: string;
   message!: string;
+  messageCreate!: string;
   // status!: string;
   users!: User[];
 
@@ -29,12 +30,13 @@ export class CreateUserComponent implements OnInit {
   // }
 
   // Get user list: users[]
-  getUsersFromService(): void {
-    this.users = this.userService.getUsers();
-  }
+  // getUsersFromService(): void {
+  //   this.users = this.userService.getUsers();
+  // }
 
   ngOnInit(): void {
-    this.getUsersFromService();
+    // this.getUsersFromService();
+    this.userService.usersCurrent.subscribe(users => this.users = users);
   }
 
 
@@ -76,7 +78,9 @@ export class CreateUserComponent implements OnInit {
       password: '',
       checkDelete: false
     }
-    this.userUrl = "/loginScreen";
+    this.userService.changeListUser(this.users);
+    this.messageCreate = "Sign Up Success";
+    // this.userUrl = "/loginScreen";
     console.log(this.users);
   }
 

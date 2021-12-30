@@ -17,6 +17,7 @@ export class AddUpdateUserComponent implements OnInit {
 
   userUrl!: string;
   message!: string;
+  messageCreate!: string;
   // status!: string;
   users!: User[];
 
@@ -25,12 +26,13 @@ export class AddUpdateUserComponent implements OnInit {
   }
 
   // Get user list: users[]
-  getUsersFromService(): void {
-    this.users = this.userService.getUsers();
-  }
+  // getUsersFromService(): void {
+  //   this.users = this.userService.getUsers();
+  // }
 
   ngOnInit(): void {
-    this.getUsersFromService();
+    // this.getUsersFromService();
+    this.userService.usersCurrent.subscribe(users => this.users = users);
   }
 
 
@@ -72,6 +74,8 @@ export class AddUpdateUserComponent implements OnInit {
       password: '',
       checkDelete: false
     }
+    this.userService.changeListUser(this.users);
+    this.messageCreate = "Sign Up Success";
     this.userUrl = "/listUser";
   }
 }

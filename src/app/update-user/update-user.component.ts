@@ -21,21 +21,22 @@ export class UpdateUserComponent implements OnInit {
   users!: User[];
   id!: string;
   index!: number;
+  messageUpdate!: string;
 
   constructor(private userService: UserService) {
 
   }
 
   // Get user list: users[]
-  getUsersFromService(): void {
-    this.users = this.userService.getUsers();
-  }
+  // getUsersFromService(): void {
+  //   this.users = this.userService.getUsers();
+  // }
 
   ngOnInit(): void {
-    this.getUsersFromService();
+    // this.getUsersFromService();
     this.userService.idCurrent.subscribe(id => this.id = id);
-    // console.log(this.id);
-    // console.log(typeof this.id);
+    console.log(this.id);
+    this.userService.usersCurrent.subscribe(users => this.users = users);
     this.getUserUpdate();
   }
   userUpdate: User = {
@@ -79,30 +80,10 @@ export class UpdateUserComponent implements OnInit {
   }
 
   updateUser(user: User) {
-
+    this.users[this.getIndex()] = this.userUpdate;
+    this.userService.changeListUser(this.users);
+    this.messageUpdate = "Updated";
+    console.log(this.users);
   }
-  // userUpdate: User = {
-  //   id: '',
-  //   fullname: '',
-  //   username: '',
-  //   password: '',
-  //   checkDelete: false
-  // }
-  // //
-  // createUser(user: User): void {
-  //   do {
-  //     var randomId = Math.floor(Math.random() * 1000) + 10;
-  //     var index = this.users.findIndex(user => user.id === String(randomId));
-  //   } while (index >= 0)
-  //   this.userUpdate.id = String(randomId);
-  //   this.users[this.users.length] = this.userUpdate;
-  //   this.userUpdate = {
-  //     id: '',
-  //     fullname: '',
-  //     username: '',
-  //     password: '',
-  //     checkDelete: false
-  //   }
-  //   this.userUrl = "/listUser";
-  // }
+  
 }

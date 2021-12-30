@@ -26,7 +26,8 @@
         </div>
 
         <div class="inputGroup buttonGroup">
-            <a id="create" type="button" value="signup" [routerLink]="userUrl" (click)="createUser(userSignUp)">Sign up</a>
+            <div style="color: green; font-style: italic;" *ngIf="messageCreate">{{ messageCreate }}</div>
+            <a id="create" type="button" value="signup" (click)="createUser(userSignUp)">Sign up</a>
             <a id="signup" type="button" value="signup" routerLink="/loginScreen">Cancel</a>
         </div>
     </div>

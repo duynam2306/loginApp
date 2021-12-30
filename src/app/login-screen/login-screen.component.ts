@@ -31,13 +31,15 @@ export class LoginScreenComponent implements OnInit {
   }
 
   // Get user list: users[]
-  getUsersFromService(): void {
-    this.users = this.userService.getUsers();
-  }
+  // getUsersFromService(): void {
+  //   this.users = this.userService.getUsers();
+  // }
 
 
   ngOnInit(): void {
-    this.getUsersFromService();
+    // this.getUsersFromService();
+    this.userService.usersCurrent.subscribe(users => this.users = users);
+    console.log(this.users);
   }
 
   // Function login
@@ -58,7 +60,8 @@ export class LoginScreenComponent implements OnInit {
       // Message error
       this.message = "Username or password is incorrect";
     }
-    console.log(this.users);
+  
+    this.userService.changeListUser(this.users);
   }
 
   // Function show and hide password when checkbox is clicked

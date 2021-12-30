@@ -17,13 +17,15 @@ export class ListUserComponent implements OnInit {
   }
 
   // Get user list: users[]
-  getUsersFromService(): void {
-    this.users = this.userService.getUsers();
-  }
+  // getUsersFromService(): void {
+  //   this.users = this.userService.getUsers();
+  // }
 
   ngOnInit(): void {
-    this.getUsersFromService();
+    // this.getUsersFromService();
     this.userService.idCurrent.subscribe(id => this.id = id);
+    this.userService.usersCurrent.subscribe(users => this.users = users);
+    console.log(this.users);
   }
 
   // Function delete user's account
@@ -32,8 +34,8 @@ export class ListUserComponent implements OnInit {
     const index = this.users.findIndex(user => user.id === userId);
     // Delete 1 user at index
     this.users.splice(index, 1);
-    console.log(this.users)
-    // console.log(this.userService.status);
+    this.userService.changeListUser(this.users);
+    console.log(this.users);
   }
 
   updateUser(userId: string): void {

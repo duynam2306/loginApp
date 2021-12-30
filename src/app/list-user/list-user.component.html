@@ -14,9 +14,9 @@
             </thead>
             <tbody>
                 <tr *ngFor="let user of users">
-                    <td *ngIf="!user.checkDelete" class="text">{{user.fullname}}</td>
-                    <td *ngIf="!user.checkDelete" class="text">{{user.username}}</td>
-                    <td *ngIf="!user.checkDelete" class="buttonEdit" style="border-right: white">
+                    <td  class="text">{{user.fullname}}</td>
+                    <td  class="text">{{user.username}}</td>
+                    <td  class="buttonEdit" style="border-right: white">
                         <a class="buttonUpdate" routerLink="/update" (click)="updateUser(user.id)">
                             <span>Update <i class="fas fa-pen"></i></span>
                         </a>
