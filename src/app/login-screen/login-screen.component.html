@@ -1,0 +1,33 @@
+<form novalidate #loginForm="ngForm">
+    <div class="loginContainer">
+        <div>
+            <img [src]="'assets/img/User_font_awesome.svg.png'" alt="Imge">
+        </div>
+        <div class="inputGroup inputUserGroup">
+            <label id="loginUser" for="inputUser">Username:</label>
+            <input [(ngModel)]="userLogin.username" name="username" required id="inputUser" type="text" maxlength="99" placeholder="abc123">
+            <div class="errorMessage" *ngIf="loginForm.controls['username']?.errors?.['required'] && loginForm.controls['username'].touched">
+                Username is invalid
+            </div>
+        </div>
+        <div class="inputGroup inputPasswordGroup">
+            <label id="loginPassword" for="inputPassword">Password:</label>
+            <input [(ngModel)]="userLogin.password" name="password" required #inputPassword id="inputPassword" type="password" maxlength="12">
+            <div class="errorMessage" *ngIf="loginForm.controls['password']?.errors?.['required'] && loginForm.controls['password'].touched">
+                Password is invalid
+            </div>
+            <input ngModel name="check" #checkButton id="showPassword" type="checkbox"
+                (click)="showPassword(checkButton)">
+            <label id="check" for="showPassword">Show password</label>
+        </div>
+        <div class="errorMessage" *ngIf="message">
+            {{ message }}
+        </div>
+        <div class="inputGroup buttonGroup">
+            <a id="create" type="button" value="signup" routerLink="/createUser">Sign up</a>
+            <!-- <button [disabled]="loginForm.invalid" id="logIn" type="button" value="logIn"
+                [routerLink]="userUrl" (click)="checkLogIn()">Log In</button> -->
+            <a id="logIn" type="button" value="logIn" [routerLink]="userUrl" (click)="checkLogIn()">Log In</a>
+        </div>
+    </div>
+</form>

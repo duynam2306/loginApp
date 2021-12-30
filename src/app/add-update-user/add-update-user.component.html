@@ -1,0 +1,34 @@
+<form novalidate #signupForm="ngForm">
+    <div class="signupContainer">
+        <div class="inputGroup inputNameGroup">
+            <label id="signupName" for="inputName">Fullname:</label>
+            <input [(ngModel)]="userSignUp.fullname" name="fullname" required id="inputName" type="text" maxlength="99" placeholder="John Wick">
+            <div class="errorMessage" *ngIf="signupForm.controls['fullname']?.errors?.['required'] && signupForm.controls['fullname'].touched">
+                Fullname is invalid
+            </div>
+        </div>
+        <div class="inputGroup inputUserGroup">
+            <label id="signupUser" for="inputUser">Username:</label>
+            <input [(ngModel)]="userSignUp.username" name="username" required id="inputUser" type="text" maxlength="99" placeholder="abc123">
+            <div class="errorMessage" *ngIf="signupForm.controls['username']?.errors?.['required'] && signupForm.controls['username'].touched">
+                Username is invalid
+            </div>
+        </div>
+        <div class="inputGroup inputPasswordGroup">
+            <label id="signupPassword" for="inputPassword">Password:</label>
+            <input [(ngModel)]="userSignUp.password" name="password" required #inputPassword id="inputPassword" type="password" maxlength="12">
+            <div class="errorMessage" *ngIf="signupForm.controls['password']?.errors?.['required'] && signupForm.controls['password'].touched">
+                Password is invalid
+            </div>
+            <input ngModel name="check" #checkButton id="showPassword" type="checkbox"
+                (click)="showPassword(checkButton)">
+            <label id="check" for="showPassword">Show password</label>
+        </div>
+
+        <div class="inputGroup buttonGroup">
+            <a id="create" type="button" value="signup" [routerLink]="userUrl" (click)="createUser(userSignUp)">Create</a>
+            <a id="signup" type="button" value="signup" routerLink="/listUser">Cancel</a>
+        </div>
+    </div>
+
+</form>

@@ -1,0 +1,35 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+    integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+<div class="table">
+    <div><i class="fas fa-caret-right"></i> List user:</div>
+    <div class="tableBorder">
+        <table class="tableListUser">
+            <thead>
+                <tr>
+                    <th style="width: 35%">Full Name</th>
+                    <th style="width: 35%">Username</th>
+                    <th style="width: 30%" style="border-right: white">Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users">
+                    <td *ngIf="!user.checkDelete" class="text">{{user.fullname}}</td>
+                    <td *ngIf="!user.checkDelete" class="text">{{user.username}}</td>
+                    <td *ngIf="!user.checkDelete" class="buttonEdit" style="border-right: white">
+                        <a class="buttonUpdate" routerLink="/update" (click)="updateUser(user.id)">
+                            <span>Update <i class="fas fa-pen"></i></span>
+                        </a>
+                        <button class="buttonDelete" (click)="deleteUser(user.id)">
+                            <span>Delete <i class="fas fa-trash"></i></span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="buttonUser">
+        <button class="create" routerLink="/add-update">Create account</button>
+        <button class="logout"routerLink="/loginScreen">Log out</button>
+    </div>
+</div>

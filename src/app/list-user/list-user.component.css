@@ -1,0 +1,105 @@
+.table {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    display: block;
+    width: 100%;
+    max-width: 800px;
+    margin: 0;
+    padding: 2.25rem;
+    border: solid 3px rgb(130, 162, 170);
+    border-radius: .5rem;
+}
+
+.tableBorder {
+    border: 2px solid rgb(143, 143, 143);
+    border-radius: 10px;
+}
+
+.tableListUser {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border-right: 2px solid rgb(220, 220, 220);
+    border-bottom: 2px solid rgb(220, 220, 220);
+}
+
+table tr:nth-child(odd){
+    background-color: white;
+}
+
+table tr:nth-child(even){
+    background-color: rgb(242, 242, 242);
+}
+
+th {
+    background-color: rgb(97, 255, 255);
+}
+
+.text {
+    padding-left: 2%;
+}
+
+.buttonEdit {
+    padding-left: 5%;
+}
+
+.buttonEdit button {
+    height: 25px;
+    margin: 1%;
+    border: none;
+    border-radius: 5px;
+}
+
+.buttonUpdate {
+    height: 25px;
+    margin: 1%;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(128, 255, 255);
+}
+
+.buttonUpdate:hover, .buttonUpdate:active {
+    background-color: rgb(69, 214, 214);
+}
+
+.buttonDelete {
+    background-color: rgb(255, 83, 83);
+}
+
+.buttonDelete:hover, .buttonDelete:active {
+    background-color: rgb(218, 69, 69);
+}
+
+.buttonUser {
+    margin: 2% 35%;
+}
+
+.buttonUser button {
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    margin: 3%;
+}
+
+.create {
+    font-weight: 600;
+    color: white;
+    background-color: rgb(45, 204, 45);
+}
+
+.create:hover, .create:active {
+    background-color: rgb(39, 170, 39);
+}
+
+.logout {
+    font-weight: 600;
+    color: black;
+    background-color: rgb(202, 202, 202);
+}
+
+.logout:hover, .logout:active {
+    background-color: rgb(182, 181, 181);
+}
