@@ -9,7 +9,11 @@
         </div>
         <div class="inputGroup inputUserGroup">
             <label id="updateUser" for="inputUser">Username:</label>
+<<<<<<< HEAD
             <input [(ngModel)]="userUpdate.username" disabled="disable" name="username" required id="inputUser" type="text" maxlength="99">
+=======
+            <input [(ngModel)]="userUpdate.username" disabled="disable" name="username" required id="inputUser" type="text" maxlength="99" (placeholder)="userUpdate.username">
+>>>>>>> upstream/main
         </div>
         <div class="inputGroup inputPasswordGroup">
             <label id="updatePassword" for="inputPassword">Password:</label>
@@ -23,8 +27,12 @@
         </div>
 
         <div class="inputGroup buttonGroup">
+<<<<<<< HEAD
             <div style="color: green; font-style: italic;" *ngIf="messageUpdate">{{ messageUpdate }}</div>
             <a id="create" type="button" value="update" (click)="updateUser(userUpdate)">Update</a>
+=======
+            <a id="create" type="button" value="update" [routerLink]="userUrl" (click)="updateUser(userUpdate)">Update</a>
+>>>>>>> upstream/main
             <a id="update" type="button" value="update" routerLink="/listUser">Cancel</a>
         </div>
     </div>
