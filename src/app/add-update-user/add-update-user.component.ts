@@ -65,6 +65,8 @@ export class AddUpdateUserComponent implements OnInit {
   
   // statusUrl = "add"
   createUser(user: User): void {
+    this.messageCreate = '';
+    this.messageCreateError = '';
     // Create unique id
     do {
       // Get random id for user created
@@ -140,6 +142,7 @@ export class AddUpdateUserComponent implements OnInit {
   // Function update user when Update is clicked in Update box
   // statusUrl = "update"
   updateUser(user: User) {
+    this.messageUpdate = '';
     // If form input is valid
     if (this.userUpdate.fullname !== '' && this.userUpdate.username !== '' && this.userUpdate.password !== '') {
       // Set user at index = user at update input form
@@ -148,13 +151,7 @@ export class AddUpdateUserComponent implements OnInit {
       this.userService.changeListUser(this.users);
       // Message
       this.messageUpdate = "Updated";
-    } else 
-    // Form input is invalid
-    if (this.userUpdate.fullname === '' && this.userUpdate.username === '' && this.userUpdate.password === '') {
-      this.messageUpdateError = 'Fullname, Username and Password is invalid';
-    }
-
-    console.log(this.users);
+    } 
   }
 
   // Function set statusUrl = "add" when click Cancel
