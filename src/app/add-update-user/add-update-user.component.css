@@ -5,7 +5,7 @@ form {
     font-size: 20px;
 }
 
-.signupContainer {
+.signupContainer, .updateContainer {
     position: absolute;
     top: 10%;
     left: 30%;

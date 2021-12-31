@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { UserService } from './user.service';
 
 @Component({
@@ -7,11 +8,18 @@ import { UserService } from './user.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'My Login App';
+  title = '';
 
-  constructor() { }
+  public constructor(private titleService: Title){
+    this.titleService.setTitle("My Login App"); 
+    }
 
   ngOnInit() {
 
+  }
+
+  status!: boolean;
+  changeStatus() {
+    this.status = true;
   }
 }

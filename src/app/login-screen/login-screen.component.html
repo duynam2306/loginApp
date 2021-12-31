@@ -24,10 +24,9 @@
             {{ message }}
         </div>
         <div class="inputGroup buttonGroup">
-            <a id="create" type="button" value="signup" routerLink="/createUser">Sign up</a>
-            <!-- <button [disabled]="loginForm.invalid" id="logIn" type="button" value="logIn"
-                [routerLink]="userUrl" (click)="checkLogIn()">Log In</button> -->
-            <a id="logIn" type="button" value="logIn" [routerLink]="userUrl" (click)="checkLogIn()">Log In</a>
+            <a id="create" type="button" value="signup" routerLink="/createUser">Signup</a>
+            <a *ngIf="!check" id="logIn" type="button" value="checklogin"  (click)="checkLogIn()">Check Login</a>
+            <a *ngIf="check" [routerLink]="userUrl" type="button" value="login" >Login</a>
         </div>
     </div>
 </form>

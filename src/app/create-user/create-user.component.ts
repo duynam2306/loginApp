@@ -9,53 +9,41 @@ import { UserService } from '../user.service';
 })
 export class CreateUserComponent implements OnInit {
 
+  // Get form inputPassword
   @ViewChild('inputPassword')
   inputPassword!: ElementRef;
   @ViewChild('checkButton')
   checkButton!: ElementRef;
 
-  userUrl!: string;
-  message!: string;
+  //  Message of create box
   messageCreate!: string;
-  // status!: string;
+  // listUser
   users!: User[];
 
   constructor(private userService: UserService) {
 
   }
 
-  // Get status
-  // getStatusFromService(): void {
-  //   this.status = this.userService.getStatus();
-  // }
-
-  // Get user list: users[]
-  // getUsersFromService(): void {
-  //   this.users = this.userService.getUsers();
-  // }
-
   ngOnInit(): void {
-    // this.getUsersFromService();
     this.userService.usersCurrent.subscribe(users => this.users = users);
   }
 
-
-
   // Function show and hide password when checkbox is clicked
   showPassword(e: any) {
+    // Get delay
     setTimeout(() => {
-      // If checkbox is checked, show password
+      // If type of password is password (checkbox isn't checked)
       if (this.inputPassword.nativeElement.type === "password") {
+        // Show password
         this.inputPassword.nativeElement.type = "text";
-
-        // If checkbox is unchecked, hide password
       } else {
+        // If checkbox is unchecked, hide password
         this.inputPassword.nativeElement.type = "password";
       }
     }, 100);
   }
 
-
+  // New user = user at input form
   userSignUp: User = {
     id: '',
     fullname: '',
@@ -63,14 +51,40 @@ export class CreateUserComponent implements OnInit {
     password: '',
     checkDelete: false
   }
-  //
+
+  // Message error of create box
+  messageCreateError!: string;
+  
+  // Function create 1 user
   createUser(user: User): void {
+    // Create unique id
     do {
+      // Get random id for user created
       var randomId = Math.floor(Math.random() * 1000) + 10;
+      // Find index location of id created, if id is exist then get new id
       var index = this.users.findIndex(user => user.id === String(randomId));
     } while (index >= 0)
     this.userSignUp.id = String(randomId);
-    this.users[this.users.length] = this.userSignUp;
+    // If form input is valid
+    if (this.userSignUp.fullname !== '' && this.userSignUp.username !== '' && this.userSignUp.password !== '') {
+      // Add userSignUp to listUser
+      this.users[this.users.length] = this.userSignUp;
+      // Update listUser 
+      this.userService.changeListUser(this.users);
+      this.messageCreate = "Sign Up Success";
+    } else 
+    // Form input is invalid
+    if (this.userSignUp.fullname === '' && this.userSignUp.username === '' && this.userSignUp.password === '') {
+      this.messageCreateError = 'Fullname, Username and Password are invalid';
+    } else {
+      // Check username is exist
+      var tempIndex = this.users.findIndex(user => user.username === this.userSignUp.username);
+      if (tempIndex >= 0) {
+        this.messageCreateError = 'Username is exist';
+      }
+    };
+
+    // Set userSignUp
     this.userSignUp = {
       id: '',
       fullname: '',
@@ -78,10 +92,6 @@ export class CreateUserComponent implements OnInit {
       password: '',
       checkDelete: false
     }
-    this.userService.changeListUser(this.users);
-    this.messageCreate = "Sign Up Success";
-    // this.userUrl = "/loginScreen";
-    console.log(this.users);
   }
 
 }

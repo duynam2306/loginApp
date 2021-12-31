@@ -13,7 +13,6 @@ import { Observable, of } from 'rxjs';
 import { User } from './model/user.model';
 import { UserService } from './user.service';
 import { AddUpdateUserComponent } from './add-update-user/add-update-user.component';
-import { UpdateUserComponent } from './update-user/update-user.component';
 
 const httpOptions ={
   headers:new HttpHeaders({'Content-Type':'Application/json'})
@@ -26,15 +25,14 @@ const apiUrl = 'https://5f0c7a5911b7f60016055e6c.mockapi.io/Api/ahihi';
     LoginScreenComponent,
     ListUserComponent,
     CreateUserComponent,
-    AddUpdateUserComponent,
-    UpdateUserComponent
+    AddUpdateUserComponent
   ],
   imports: [
     FormsModule,
     BrowserModule,
     AppRoutingModule,
   ],
-  providers: [UserService],
+  providers: [UserService, Title],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

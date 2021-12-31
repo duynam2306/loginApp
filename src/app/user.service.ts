@@ -19,6 +19,7 @@ export class UserService {
   private idSource = new BehaviorSubject('aaa');
   idCurrent = this.idSource.asObservable();
 
+  // Update id for all component
   changeId(id: string) {
     this.idSource.next(id);
   }
@@ -35,8 +36,17 @@ export class UserService {
   );
   usersCurrent = this.usersSource.asObservable();
 
+  // Update listUser for all component
   changeListUser(listUser: User[]) {
     this.usersSource.next(listUser);
+  }
+
+  private urlSource = new BehaviorSubject('1');
+  urlCurrent = this.urlSource.asObservable();
+
+  // Update statusUrl for all component
+  changeUrl(url: string) {
+    this.urlSource.next(url);
   }
 
   // Method return user list

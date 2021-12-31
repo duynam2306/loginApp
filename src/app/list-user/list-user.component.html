@@ -17,12 +17,16 @@
                     <td  class="text">{{user.fullname}}</td>
                     <td  class="text">{{user.username}}</td>
                     <td  class="buttonEdit" style="border-right: white">
-                        <a class="buttonUpdate" routerLink="/update" (click)="updateUser(user.id)">
-                            <span>Update <i class="fas fa-pen"></i></span>
-                        </a>
-                        <button class="buttonDelete" (click)="deleteUser(user.id)">
-                            <span>Delete <i class="fas fa-trash"></i></span>
-                        </button>
+                        <div class="buttonUpdate">
+                            <a class="buttonUpdate" routerLink="/add-update" (click)="updateUser(user.id)">
+                                <span>Update <i class="fas fa-pen"></i></span>
+                            </a>
+                        </div>
+                        <div class="buttonDelete" style="margin-left: 5px;">
+                            <a class="buttonDelete" [routerLink]="checkUrl" (click)="deleteUser(user.id)">
+                                <span>Delete <i class="fas fa-trash"></i></span>
+                            </a>
+                        </div>
                     </td>
                 </tr>
             </tbody>

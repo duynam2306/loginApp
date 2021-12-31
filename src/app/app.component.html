@@ -26,8 +26,9 @@
 </head>
 
 <body>
-    <div class="welcome">
-        <button id="logIn" type="submit" value="logIn" routerLink="/loginScreen">Click here to Login</button>
+    <div *ngIf="!status" class="welcome">
+        <p>Welcome to My World</p>
+        <button id="logIn" type="submit" value="logIn" routerLink="/loginScreen" (click)="changeStatus()">Click here to Log In</button>
     </div>
     <router-outlet></router-outlet>
 </body>
