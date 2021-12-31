@@ -26,6 +26,9 @@ export class ListUserComponent implements OnInit {
     this.userService.urlCurrent.subscribe(url => this.statusUrl = url);
     console.log(this.users);
   }
+  
+  // 
+  checkUrl!: string;
 
   // routeLink to loginScreen
   checkUrl!: string;
@@ -39,7 +42,11 @@ export class ListUserComponent implements OnInit {
     // Update listUser
     this.userService.changeListUser(this.users);
     console.log(this.users);
+<<<<<<< HEAD
     // When listUser has 1 user, delete user = log out
+=======
+    // When user list has 1 user, delete user = log out
+>>>>>>> upstream/main
     if (this.users.length == 1) {
       this.checkUrl = "/loginScreen";
     }
