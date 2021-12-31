@@ -67,21 +67,22 @@ export class CreateUserComponent implements OnInit {
     this.userSignUp.id = String(randomId);
     // If form input is valid
     if (this.userSignUp.fullname !== '' && this.userSignUp.username !== '' && this.userSignUp.password !== '') {
-      // Add userSignUp to listUser
-      this.users[this.users.length] = this.userSignUp;
-      // Update listUser 
-      this.userService.changeListUser(this.users);
-      this.messageCreate = "Sign Up Success";
+      // Check username is exist
+      var tempIndex = this.users.findIndex(user => user.username === this.userSignUp.username);
+      // If username is exist in listUser
+      if (tempIndex >= 0) {
+        this.messageCreateError = 'Username is exist';
+      } else {
+        // Add userSignUp to listUser
+        this.users[this.users.length] = this.userSignUp;
+        // Update listUser 
+        this.userService.changeListUser(this.users);
+        this.messageCreate = "Sign Up Success";
+      }
     } else 
     // Form input is invalid
     if (this.userSignUp.fullname === '' && this.userSignUp.username === '' && this.userSignUp.password === '') {
       this.messageCreateError = 'Fullname, Username and Password are invalid';
-    } else {
-      // Check username is exist
-      var tempIndex = this.users.findIndex(user => user.username === this.userSignUp.username);
-      if (tempIndex >= 0) {
-        this.messageCreateError = 'Username is exist';
-      }
     };
 
     // Set userSignUp
