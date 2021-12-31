@@ -61,16 +61,6 @@ th {
 .buttonUpdate {
     background-color: rgb(128, 255, 255);
 }
-<<<<<<< HEAD
-
-/* .buttonUpdate span {
-    height: 55px;
-    margin: 1%;
-    border: none;
-    border-radius: 5px;
-} */
-=======
->>>>>>> upstream/main
 
 .buttonUpdate:hover, .buttonUpdate:active {
     background-color: rgb(69, 214, 214);
