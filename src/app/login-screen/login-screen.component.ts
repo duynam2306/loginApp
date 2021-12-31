@@ -44,8 +44,6 @@ export class LoginScreenComponent implements OnInit {
     checkDelete: false,
   }
   
-  // Variable to check exist uers from input
-  check: boolean = false;
   // Function login
   checkLogIn(): void {
     // Find index location of login user
@@ -54,7 +52,6 @@ export class LoginScreenComponent implements OnInit {
     if (index >= 0) {
       // Check password of log in user corresponding to username
       if (this.userLogin.password === this.users[index].password) {
-<<<<<<< HEAD
         // Update listUser
         this.userService.changeListUser(this.users);
         // Update status = "add"
@@ -62,10 +59,8 @@ export class LoginScreenComponent implements OnInit {
         // Show button login in html
         this.check = true;
         // Routing to listUserComponent
-=======
         // Go to listUser screen
         this.userService.changeListUser(this.users);
->>>>>>> upstream/main
         this.userUrl = "/listUser";
         this.check = true;
       } else {
@@ -76,10 +71,6 @@ export class LoginScreenComponent implements OnInit {
       // Message error
       this.message = "Username or password is incorrect";
     }
-<<<<<<< HEAD
-=======
-  
->>>>>>> upstream/main
   }
 
   // Function show and hide password when checkbox is clicked
