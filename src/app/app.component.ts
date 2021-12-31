@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-<<<<<<< HEAD
 import { UserService } from './user.service';
-=======
->>>>>>> upstream/main
 
 @Component({
   selector: 'app-root',
