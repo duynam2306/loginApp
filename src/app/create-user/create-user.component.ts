@@ -57,6 +57,8 @@ export class CreateUserComponent implements OnInit {
   
   // Function create 1 user
   createUser(user: User): void {
+    this.messageCreate = '';
+    this.messageCreateError = '';
     // Create unique id
     do {
       // Get random id for user created
