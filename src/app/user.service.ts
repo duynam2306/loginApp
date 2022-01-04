@@ -17,42 +17,55 @@ const apiUrl = 'https://61cada0a194ffe001778899f.mockapi.io/dataUsers';
 export class UserService {
 
   private idSource = new BehaviorSubject('0');
-  idCurrent = this.idSource.asObservable();
+  public idCurrent = this.idSource.asObservable();
 
   // Update id for all component
-  changeId(id: string) {
+  public changeId(id: string) {
     this.idSource.next(id);
   }
 
-  private usersSource = new BehaviorSubject(
-    // {
-    // id: '1',
-    // fullname: 'Ali',
-    // username: 'user1',
-    // password: 'password1',
-    // checkDelete: false
-    // }
-    listUsers
-  );
-  usersCurrent = this.usersSource.asObservable();
+  private usersSource = new BehaviorSubject(listUsers);
+  public usersCurrent = this.usersSource.asObservable();
 
   // Update listUser for all component
-  changeListUser(listUser: User[]) {
-    this.usersSource.next(listUser);
+  public changeListUser(listUsers: User[]) {
+    this.usersSource.next(listUsers);
   }
 
   private urlSource = new BehaviorSubject('1');
-  urlCurrent = this.urlSource.asObservable();
+  public urlCurrent = this.urlSource.asObservable();
 
   // Update statusUrl for all component
-  changeUrl(url: string) {
+  public changeUrl(url: string) {
     this.urlSource.next(url);
   }
 
-  // Method return user list
-  // getUsers(): User[] {
-  //   return listUsers;
-  // }
+  // Create a user
+  public add(user: User) {
+    // Add a user to listUsers
+    listUsers[listUsers.length] = user;
+  }
+
+
+  // Delete a user
+  public delete(id: string) {
+    // Find index location of deleted user (by id of user is clicked)
+    const index = listUsers.findIndex(user => user.id === id);
+    // Delete 1 user at index
+    listUsers.splice(index, 1);
+  }
+
+  // Set a only id for user
+  public setIdUser(user: User) {
+    // Create unique id
+    do {
+      // Get random id for user created
+      var randomId = Math.floor(Math.random() * 1000) + 10;
+      // Find index location of id created, if id is exist then get new id
+      var index = listUsers.findIndex(user => user.id === String(randomId));
+    } while (index >= 0)
+    user.id = String(randomId);
+  }
 
   constructor() { }
 
