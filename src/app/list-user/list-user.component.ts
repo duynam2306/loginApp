@@ -34,7 +34,6 @@ export class ListUserComponent implements OnInit {
   public deleteUser(userId: string): void {
     // Delete user
     this.userService.delete(userId);
-    console.log(this.users);
     // When listUser has 1 user, delete user = log out
     if (this.users.length == 1) {
       this.checkUrl = "/loginScreen";
