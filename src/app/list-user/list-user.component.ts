@@ -32,12 +32,8 @@ export class ListUserComponent implements OnInit {
 
   // Function delete user when Delete is clicked
   public deleteUser(userId: string): void {
-    // Find index location of deleted user (by id of user is clicked)
-    const index = this.users.findIndex(user => user.id === userId);
-    // Delete 1 user at index
-    this.users.splice(index, 1);
-    // Update listUser
-    this.userService.changeListUser(this.users);
+    // Delete user
+    this.userService.delete(userId);
     console.log(this.users);
     // When listUser has 1 user, delete user = log out
     if (this.users.length == 1) {
