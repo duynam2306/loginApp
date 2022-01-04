@@ -16,9 +16,9 @@ export class CreateUserComponent implements OnInit {
   checkButton!: ElementRef;
 
   //  Message of create box
-  messageCreate!: string;
+  public messageCreate!: string;
   // listUser
-  users!: User[];
+  private users!: User[];
 
   constructor(private userService: UserService) {
 
@@ -29,7 +29,7 @@ export class CreateUserComponent implements OnInit {
   }
 
   // Function show and hide password when checkbox is clicked
-  showPassword(e: any) {
+  public showPassword(e: any) {
     // Get delay
     setTimeout(() => {
       // If type of password is password (checkbox isn't checked)
@@ -44,7 +44,7 @@ export class CreateUserComponent implements OnInit {
   }
 
   // New user = user at input form
-  userSignUp: User = {
+  public userSignUp: User = {
     id: '',
     fullname: '',
     username: '',
@@ -53,10 +53,10 @@ export class CreateUserComponent implements OnInit {
   }
 
   // Message error of create box
-  messageCreateError!: string;
+  public messageCreateError!: string;
   
   // Function create 1 user
-  createUser(user: User): void {
+  public createUser(user: User): void {
     this.messageCreate = '';
     this.messageCreateError = '';
     // Create unique id
