@@ -53,15 +53,12 @@ export class LoginScreenComponent implements OnInit {
     if (index >= 0) {
       // Check password of log in user corresponding to username
       if (this.userLogin.password === this.users[index].password) {
-        // Update listUser
-        this.userService.changeListUser(this.users);
         // Update status = "add"
         this.userService.changeUrl("add");
         // Show button login in html
         this.check = true;
         // Routing to listUserComponent
         // Go to listUser screen
-        this.userService.changeListUser(this.users);
         this.userUrl = "/listUser";
         this.check = true;
       } else {
