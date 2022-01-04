@@ -52,21 +52,27 @@ export class CreateUserComponent implements OnInit {
     checkDelete: false
   }
 
+  // Reset user
+  private resetUser(): void {
+    this.userSignUp = {
+      id: '',
+      fullname: '',
+      username: '',
+      password: '',
+      checkDelete: false
+    }
+  }
+
   // Message error of create box
   public messageCreateError!: string;
-  
+
   // Function create 1 user
   public createUser(user: User): void {
     this.messageCreate = '';
     this.messageCreateError = '';
-    // Create unique id
-    do {
-      // Get random id for user created
-      var randomId = Math.floor(Math.random() * 1000) + 10;
-      // Find index location of id created, if id is exist then get new id
-      var index = this.users.findIndex(user => user.id === String(randomId));
-    } while (index >= 0)
-    this.userSignUp.id = String(randomId);
+
+    this.userService.setIdUser(this.userSignUp);
+
     // If form input is valid
     if (this.userSignUp.fullname !== '' && this.userSignUp.username !== '' && this.userSignUp.password !== '') {
       // Check username is exist
@@ -75,26 +81,20 @@ export class CreateUserComponent implements OnInit {
       if (tempIndex >= 0) {
         this.messageCreateError = 'Username is exist';
       } else {
-        // Add userSignUp to listUser
-        this.users[this.users.length] = this.userSignUp;
-        // Update listUser 
-        this.userService.changeListUser(this.users);
+        // Create a user
+        this.userService.add(this.userSignUp);
         this.messageCreate = "Sign Up Success";
+        console.log(this.users)
       }
-    } else 
-    // Form input is invalid
-    if (this.userSignUp.fullname === '' && this.userSignUp.username === '' && this.userSignUp.password === '') {
-      this.messageCreateError = 'Fullname, Username and Password are invalid';
-    };
+    } else
+      // Form input is invalid
+      if (this.userSignUp.fullname === '' && this.userSignUp.username === '' && this.userSignUp.password === '') {
+        this.messageCreateError = 'Fullname, Username and Password are invalid';
+      };
 
     // Set userSignUp
-    this.userSignUp = {
-      id: '',
-      fullname: '',
-      username: '',
-      password: '',
-      checkDelete: false
-    }
+    this.resetUser();
+    
   }
 
 }
