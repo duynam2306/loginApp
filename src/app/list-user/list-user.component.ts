@@ -10,11 +10,11 @@ import { User } from '../model/user.model';
 export class ListUserComponent implements OnInit {
 
   // listUser
-  users!: User[];
+  public users!: User[];
   // Index of user is clicked
-  id!: string;
+  private id!: string;
   // Status of event click
-  statusUrl!: string;
+  private statusUrl!: string;
 
   constructor(private userService: UserService) { 
 
@@ -26,12 +26,12 @@ export class ListUserComponent implements OnInit {
     this.userService.urlCurrent.subscribe(url => this.statusUrl = url);
     console.log(this.users);
   }
- 
+
   // routeLink to loginScreen
-  checkUrl!: string;
+  public checkUrl!: string;
 
   // Function delete user when Delete is clicked
-  deleteUser(userId: string): void {
+  public deleteUser(userId: string): void {
     // Find index location of deleted user (by id of user is clicked)
     const index = this.users.findIndex(user => user.id === userId);
     // Delete 1 user at index
@@ -39,14 +39,14 @@ export class ListUserComponent implements OnInit {
     // Update listUser
     this.userService.changeListUser(this.users);
     console.log(this.users);
-    // When user list has 1 user, delete user = log out
+    // When listUser has 1 user, delete user = log out
     if (this.users.length == 1) {
       this.checkUrl = "/loginScreen";
     }
   }
 
   // Function set status, set id when Update is clicked
-  updateUser(userId: string): void {
+  public updateUser(userId: string): void {
     // Find index location of updated user (by id of user is clicked)
     const index = this.users.findIndex(user => user.id === userId);
     // Set statusUrl = "update"
