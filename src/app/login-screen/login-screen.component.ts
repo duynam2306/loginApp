@@ -16,13 +16,13 @@ export class LoginScreenComponent implements OnInit {
   checkButton!: ElementRef;
 
   // routeLink to listUserComponent
-  userUrl!: string;
+  public userUrl!: string;
   // Message
-  message!: string;
+  public message!: string;
   // listUser
-  users!: User[];
+  public users!: User[];
   // Status of event at listUserComponent
-  statusUrl!: string;
+  public statusUrl!: string;
 
   constructor(public userService: UserService) {
 
@@ -34,9 +34,9 @@ export class LoginScreenComponent implements OnInit {
   }
 
   // Check login information
-  check: boolean = false;
+  public check: boolean = false;
   //New user = user at input form
-  userLogin: User = {
+  public userLogin: User = {
     id: '',
     fullname: '',
     username: '',
@@ -44,8 +44,9 @@ export class LoginScreenComponent implements OnInit {
     checkDelete: false,
   }
   
+  
   // Function login
-  checkLogIn(): void {
+  public checkLogIn(): void {
     // Find index location of login user
     const index = this.users.findIndex(user => user.username === this.userLogin.username);
     // If username of login user exist in users list
@@ -74,7 +75,7 @@ export class LoginScreenComponent implements OnInit {
   }
 
   // Function show and hide password when checkbox is clicked
-  showPassword(e: any) {
+  public showPassword(e: any) {
     // Get delay
     setTimeout(() => {
       // If type of password is password (checkbox isn't checked)
