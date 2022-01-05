@@ -1,36 +1,35 @@
-<form novalidate #signupForm="ngForm">
+<form novalidate [formGroup]="form">
     <div class="signupContainer">
         <div class="inputGroup inputNameGroup">
-            <label id="signupName" for="inputName">Fullname:</label>
-            <input [(ngModel)]="userSignUp.fullname" name="fullname" required id="inputName" type="text" maxlength="99" placeholder="John Wick">
-            <div class="errorMessage" *ngIf="signupForm.controls['fullname']?.errors?.['required'] && signupForm.controls['fullname'].touched">
+            <label for="inputName">Fullname:</label>
+            <input formControlName="fullname" type="text" placeholder="John Wick">
+            <div class="errorMessage" *ngIf="!fullname?.valid && (fullname?.dirty || fullname?.touched)">
                 Fullname is invalid
             </div>
         </div>
         <div class="inputGroup inputUserGroup">
             <label id="signupUser" for="inputUser">Username:</label>
-            <input [(ngModel)]="userSignUp.username" name="username" required id="inputUser" type="text" maxlength="99" placeholder="abc123">
-            <div class="errorMessage" *ngIf="signupForm.controls['username']?.errors?.['required'] && signupForm.controls['username'].touched">
+            <input formControlName="username" type="text" placeholder="abc123">
+            <div class="errorMessage" *ngIf="!username?.valid && (username?.dirty || username?.touched)">
                 Username is invalid
             </div>
         </div>
         <div class="inputGroup inputPasswordGroup">
             <label id="signupPassword" for="inputPassword">Password:</label>
-            <input [(ngModel)]="userSignUp.password" name="password" required #inputPassword id="inputPassword" type="password" maxlength="12">
-            <div class="errorMessage" *ngIf="signupForm.controls['password']?.errors?.['required'] && signupForm.controls['password'].touched">
+            <input formControlName="password" #inputPassword type="password">
+            <div class="errorMessage" *ngIf="!password?.valid && (password?.dirty || password?.touched)">
                 Password is invalid
             </div>
-            <input ngModel name="check" #checkButton id="showPassword" type="checkbox"
+            <input name="check" #checkButton id="showPassword" type="checkbox"
                 (click)="showPassword(checkButton)">
             <label id="check" for="showPassword">Show password</label>
         </div>
 
         <div class="inputGroup buttonGroup">
-            <div style="color: green; font-style: italic;" *ngIf="messageCreate">{{ messageCreate }}</div>
-            <div style="color: red; font-style: italic;" *ngIf="messageCreateError">{{ messageCreateError }}</div>
-            <a id="create" type="button" value="signup" (click)="createUser(userSignUp)">Signup</a>
-            <a type="button" value="signup" routerLink="/loginScreen">Cancel</a>
+            <div style="color: green; font-style: italic;" *ngIf="message">{{ message }}</div>
+            <div style="color: red; font-style: italic;" *ngIf="messageError">{{ messageError }}</div>
+            <a id="create" type="button" value="signup" (click)="createUser(userForm)">Create</a>
+            <a id="signup" type="button" value="signup" routerLink="/loginScreen">Cancel</a>
         </div>
     </div>
-
 </form>
