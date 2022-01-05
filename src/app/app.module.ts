@@ -13,6 +13,7 @@ import { Observable, of } from 'rxjs';
 import { User } from './model/user.model';
 import { UserService } from './user.service';
 import { AddUpdateUserComponent } from './add-update-user/add-update-user.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const httpOptions ={
   headers:new HttpHeaders({'Content-Type':'Application/json'})
@@ -31,6 +32,7 @@ const apiUrl = 'https://5f0c7a5911b7f60016055e6c.mockapi.io/Api/ahihi';
     FormsModule,
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [UserService, Title],
   bootstrap: [AppComponent]
