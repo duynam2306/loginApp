@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { User } from '../model/user.model';
 import { UserService } from '../user.service';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login-screen',
@@ -23,36 +24,50 @@ export class LoginScreenComponent implements OnInit {
   public users!: User[];
   // Status of event at listUserComponent
   public statusUrl!: string;
+  loginForm!: FormGroup;
 
-  constructor(public userService: UserService) {
+  constructor(public userService: UserService, private formBuilder: FormBuilder) {
 
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    // Form loginForm
+    this.loginForm = this.formBuilder.group({
+      username: ['', [Validators.maxLength(12), Validators.required]],
+      password: ['', [Validators.maxLength(10), Validators.required]]
+    });
+
     this.userService.usersCurrent.subscribe(users => this.users = users);
     this.userService.urlCurrent.subscribe(url => this.statusUrl = url);
+  }
+
+  get username() {
+    return this.loginForm.get('username');
+  }
+
+  get password() {
+    return this.loginForm.get('password');
   }
 
   // Check login information
   public check: boolean = false;
   //New user = user at input form
-  public userLogin: User = {
-    id: '',
-    fullname: '',
-    username: '',
-    password: '',
-    checkDelete: false,
-  }
   
-  
+  // Username and password input
+  private usernameLogin!: string;
+  private passwordLogin!: string;
+
   // Function login
   public checkLogIn(): void {
+    this.usernameLogin = this.loginForm.value.username;
+    this.passwordLogin = this.loginForm.value.password;
+
     // Find index location of login user
-    const index = this.users.findIndex(user => user.username === this.userLogin.username);
+    const index = this.users.findIndex(user => user.username === this.usernameLogin);
     // If username of login user exist in users list
     if (index >= 0) {
       // Check password of log in user corresponding to username
-      if (this.userLogin.password === this.users[index].password) {
+      if (this.passwordLogin === this.users[index].password) {
         // Update status = "add"
         this.userService.changeUrl("add");
         // Show button login in html
