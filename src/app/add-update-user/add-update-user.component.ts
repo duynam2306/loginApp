@@ -3,6 +3,7 @@ import { UserService } from '../user.service';
 import { ViewChild, ElementRef } from '@angular/core';
 import { User } from '../model/user.model';
 import { identifierName } from '@angular/compiler';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-update-user',
@@ -17,17 +18,16 @@ export class AddUpdateUserComponent implements OnInit {
   @ViewChild('checkButton')
   checkButton!: ElementRef;
 
-  // message of create box
-  public messageCreate!: string;
-  public messageCreateError!: string;
   // listUser
   private users!: User[];
   // id of user was click
   private id!: string;
-  // status = "add"
+  // status = "add" 
   public statusUrl!: string;
 
-  constructor(private userService: UserService) {
+  form!: FormGroup;
+
+  constructor(private userService: UserService, private formBuilder: FormBuilder) {
 
   }
 
@@ -35,7 +35,60 @@ export class AddUpdateUserComponent implements OnInit {
     this.userService.usersCurrent.subscribe(users => this.users = users);
     this.userService.idCurrent.subscribe(id => this.id = id);
     this.userService.urlCurrent.subscribe(url => this.statusUrl = url);
-    this.getUserUpdate();
+    this.setUserForm();
+    console.log(this.userForm)
+
+    this.form = this.formBuilder.group({
+      fullname: [this.userForm.fullname, [Validators.maxLength(40), Validators.required]],
+      username: [this.userForm.username, [Validators.maxLength(12), Validators.required]],
+      password: [this.userForm.password, [Validators.maxLength(10), Validators.required]],
+    })
+  }
+
+  get fullname() {
+    return this.form.get('fullname');
+  }
+
+  get username() {
+    return this.form.get('username');
+  }
+
+  get password() {
+    return this.form.get('password');
+  }
+
+  public userForm: User = {
+    id: '',
+    fullname: '',
+    username: '',
+    password: '',
+    checkDelete: false,
+  }
+
+  // Set user in form
+  private setUserForm(): void {
+    if (this.statusUrl === 'add') {
+
+    } else if (this.statusUrl === 'update') {
+      this.userForm = {
+        id: this.users[Number(this.id)].id,
+        fullname: this.users[Number(this.id)].fullname,
+        username: this.users[Number(this.id)].username,
+        password: this.users[Number(this.id)].password,
+        checkDelete: false,
+      }
+    }
+  }
+
+  // Reset user
+  private resetUser(): void {
+    this.userForm = {
+      id: '',
+      fullname: '',
+      username: '',
+      password: '',
+      checkDelete: false
+    }
   }
 
   public showPassword(e: any) {
@@ -52,92 +105,62 @@ export class AddUpdateUserComponent implements OnInit {
     }, 100);
   }
 
-  // New user = user at index
-  public userUpdate: User = {
-    id: '',
-    fullname: '',
-    username: '',
-    password: '',
-    checkDelete: false,
-  }
-
-  // Get user need to be updated
-  private getUserUpdate(): void {
-    this.userUpdate = {
-      id: this.users[Number(this.id)].id,
-      fullname: this.users[Number(this.id)].fullname,
-      username: this.users[Number(this.id)].username,
-      password: this.users[Number(this.id)].password,
-      checkDelete: false,
-    }
-  }
-
-  // Message of update box
-  public messageUpdate!: string;
-  public messageUpdateError!: string;
+  // message of create box
+  public message!: string;
+  public messageError!: string;
 
   // Function update user when Update is clicked in Update box
   // statusUrl = "update"
   public updateUser(user: User) {
-    this.messageUpdate = '';
+    this.message = '';
+    
+    this.userForm.fullname = this.form.value.fullname;
+    this.userForm.password = this.form.value.password;
+
     // If form input is valid
-    if (this.userUpdate.fullname !== '' && this.userUpdate.username !== '' && this.userUpdate.password !== '') {
+    if (this.userForm.fullname !== '' && this.userForm.username !== '' && this.userForm.password !== '') {
       // Set user at index = user at update input form
-      this.users[Number(this.id)] = this.userUpdate;
+      this.users[Number(this.id)] = this.userForm;
       // Update listUser
       this.userService.changeListUser(this.users);
       // Message
-      this.messageUpdate = "Updated";
+      this.message = "Updated";
     } 
-  }
 
-  // New user = user at signup input form
-  public userSignUp: User = {
-    id: '',
-    fullname: '',
-    username: '',
-    password: '',
-    checkDelete: false
-  }
-
-  // Reset user
-  private resetUser(): void {
-    this.userSignUp = {
-      id: '',
-      fullname: '',
-      username: '',
-      password: '',
-      checkDelete: false
-    }
+    // status = "add" => reset userForm
+    this.changeStatus();
   }
 
   // statusUrl = "add"
   public createUser(user: User): void {
-    this.messageCreate = '';
-    this.messageCreateError = '';
+    this.message = '';
+    this.messageError = '';
+
+    this.userForm.fullname = this.form.value.fullname;
+    this.userForm.username = this.form.value.username;
+    this.userForm.password = this.form.value.password;
     
-    this.userService.setIdUser(this.userSignUp);
+    this.userService.setIdUser(this.userForm);
 
     // If form input is valid
-    if (this.userSignUp.fullname !== '' && this.userSignUp.username !== '' && this.userSignUp.password !== '') {
+    if (this.userForm.fullname !== '' && this.userForm.username !== '' && this.userForm.password !== '') {
       // Check username is exist
-      var tempIndex = this.users.findIndex(user => user.username === this.userSignUp.username);
+      var tempIndex = this.users.findIndex(user => user.username === this.userForm.username);
       if (tempIndex >= 0) {
-        this.messageCreateError = 'Username is exist';
+        this.messageError = 'Username is exist';
       } else {
-        this.userService.add(this.userSignUp);
-        this.messageCreate = "Sign Up Success";
+        this.userService.add(this.userForm);
+        this.message = "Sign Up Success";
       }
     } else
       // Form input is invalid
-      if (this.userSignUp.fullname === '' && this.userSignUp.username === '' && this.userSignUp.password === '') {
-        this.messageCreateError = 'Fullname, Username and Password are invalid';
+      if (this.userForm.fullname === '' && this.userForm.username === '' && this.userForm.password === '') {
+        this.messageError = 'Fullname, Username and Password are invalid';
       };
 
-    // Set userSignUp
-    this.resetUser();
+    // status = "add" => reset userForm
+    this.changeStatus();
   }
-
   
   // Function set statusUrl = "add" when click Cancel
   public changeStatus() {
